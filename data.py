@@ -116,9 +116,19 @@ def labelVisualize(num_class,color_dict,img):
         img_out[img == i,:] = color_dict[i]
     return img_out / 255
 
+def saveResult(save_path, npyfile, flag_multi_class=False, num_class=2):
+    for i, item in enumerate(npyfile):
+        if flag_multi_class:
+            img = labelVisualize(num_class, COLOR_DICT, item)
+        else:
+            img = item[:, :, 0]
+
+        # Convert to uint8 format (0-255 range) before saving
+        img = (img * 255).astype(np.uint8)
+        io.imsave(os.path.join(save_path, "%d_predict.png" % i), img)
 
 
-def saveResult(save_path,npyfile,flag_multi_class = False,num_class = 2):
-    for i,item in enumerate(npyfile):
-        img = labelVisualize(num_class,COLOR_DICT,item) if flag_multi_class else item[:,:,0]
-        io.imsave(os.path.join(save_path,"%d_predict.png"%i),img)
+#def saveResult(save_path,npyfile,flag_multi_class = False,num_class = 2):
+#    for i,item in enumerate(npyfile):
+#        img = labelVisualize(num_class,COLOR_DICT,item) if flag_multi_class else item[:,:,0]
+#        io.imsave(os.path.join(save_path,"%d_predict.png"%i),img)
