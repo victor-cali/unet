@@ -1,0 +1,12 @@
+name: unet_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - keras
+  - tensorflow
+  - tensorflow-gpu
+  - cudatoolkit  # Make sure to match this with your GPU's compatibility
+  - cudnn  # CUDA Deep Neural Network library
+  - scikit-image
